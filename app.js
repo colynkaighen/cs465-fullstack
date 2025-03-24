@@ -1,35 +1,26 @@
 const express = require('express');
 const path = require('path');
-const exphbs = require('express-handlebars');
+const hbs = require('hbs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Set Handlebars as the templating engine
-app.engine('hbs', exphbs.engine({
-    extname: 'hbs', 
-    defaultLayout: 'main', 
-    layoutsDir: path.join(__dirname, 'app_server', 'views', 'layouts'),
-    partialsDir: path.join(__dirname, 'app_server', 'views', 'partials')
-}));
-app.set('view engine', 'hbs');
+// View engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
+app.set('view engine', 'hbs');
 
-// Serve static files from 'public'
+// Register partials
+hbs.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
+
+// Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Import routes
-const travelRouter = require('./app_server/routes/travelRoutes');
-app.use('/travel', travelRouter);
+// Load travel routes
+const travelRoutes = require('./app_server/routes/travelRoutes');
+app.use('/travel', travelRoutes);
 
-// Home Route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+// Error handling (404 fallback)
+app.use((req, res) => {
+  res.status(404).send('Page not found');
 });
 
 module.exports = app;
-

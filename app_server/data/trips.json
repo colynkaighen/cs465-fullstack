@@ -1,0 +1,24 @@
+[
+    {
+      "name": "Beach Paradise",
+      "location": "Maldives",
+      "price": "$3,200",
+      "duration": "7 Days",
+      "description": "Relax in an overwater villa surrounded by crystal-clear waters."
+    },
+    {
+      "name": "Mountain Explorer",
+      "location": "Swiss Alps",
+      "price": "$2,800",
+      "duration": "5 Days",
+      "description": "Adventure through snowy trails and charming mountain towns."
+    },
+    {
+      "name": "City Lights",
+      "location": "Tokyo, Japan",
+      "price": "$2,500",
+      "duration": "6 Days",
+      "description": "Experience the energy and culture of Japan’s capital city."
+    }
+  ]
+  

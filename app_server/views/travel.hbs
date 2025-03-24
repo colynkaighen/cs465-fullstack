@@ -1,0 +1,15 @@
+{{> header}}
+
+<h1>Travel</h1>
+
+{{#each trips}}
+  <div class="trip">
+    <h2>{{name}}</h2>
+    <p><strong>Location:</strong> {{location}}</p>
+    <p><strong>Price:</strong> {{price}}</p>
+    <p><strong>Duration:</strong> {{duration}}</p>
+    <p>{{description}}</p>
+  </div>
+{{/each}}
+
+{{> footer}}
