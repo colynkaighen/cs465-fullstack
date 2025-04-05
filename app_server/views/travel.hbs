@@ -4,10 +4,10 @@
 
 {{#each trips}}
   <div class="trip">
-    <h2>{{name}}</h2>
-    <p><strong>Location:</strong> {{location}}</p>
-    <p><strong>Price:</strong> {{price}}</p>
-    <p><strong>Duration:</strong> {{duration}}</p>
+    <h2><a href="/api/trips/{{this.code}}">{{this.name}}</a></h2>
+    <p><strong>Location:</strong> {{resort}}</p>
+    <p><strong>Price:</strong> {{perPerson}}</p>
+    <p><strong>Duration:</strong> {{length}}</p>
     <p>{{description}}</p>
   </div>
 {{/each}}

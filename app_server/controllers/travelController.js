@@ -1,17 +1,27 @@
-const fs = require('fs');
-const path = require('path');
+const tripsEndpoint = 'http://localhost:3000/api/trips';
 
-exports.showTravelPage = (req, res) => {
-  const filePath = path.join(__dirname, '../data/trips.json');
+const options = {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+  }
+};
 
+// GET travel view using API data
+const showTravelPage = async (req, res, next) => {
   try {
-    const trips = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const response = await fetch(tripsEndpoint, options);
+    const trips = await response.json();
     res.render('travel', {
-      title: 'Travel Page',
+      title: 'Travlr Getaways',
       trips: trips
     });
   } catch (err) {
-    console.error('Error loading trip data:', err);
-    res.status(500).send('Error loading trip data');
+    console.error('Error fetching trips:', err);
+    res.status(500).send(err.message);
   }
+};
+
+module.exports = {
+  showTravelPage
 };

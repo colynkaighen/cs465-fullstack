@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 
+// Connect to MongoDB
+require('./app_api/models/db');
+
 const app = express();
 
 // View engine setup
@@ -14,11 +17,15 @@ hbs.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Load travel routes
+// Travel route
 const travelRoutes = require('./app_server/routes/travelRoutes');
 app.use('/travel', travelRoutes);
 
-// Error handling (404 fallback)
+// API route
+const apiRouter = require('./app_api/routes/index');
+app.use('/api', apiRouter);
+
+// Error handling
 app.use((req, res) => {
   res.status(404).send('Page not found');
 });
