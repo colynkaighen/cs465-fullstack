@@ -1,24 +1,32 @@
 [
-    {
-      "name": "Beach Paradise",
-      "location": "Maldives",
-      "price": "$3,200",
-      "duration": "7 Days",
-      "description": "Relax in an overwater villa surrounded by crystal-clear waters."
-    },
-    {
-      "name": "Mountain Explorer",
-      "location": "Swiss Alps",
-      "price": "$2,800",
-      "duration": "5 Days",
-      "description": "Adventure through snowy trails and charming mountain towns."
-    },
-    {
-      "name": "City Lights",
-      "location": "Tokyo, Japan",
-      "price": "$2,500",
-      "duration": "6 Days",
-      "description": "Experience the energy and culture of Japan’s capital city."
-    }
-  ]
-  
+  {
+    "code": "BEACH001",
+    "name": "Beach Paradise",
+    "length": "7 Days",
+    "start": "2024-06-01",
+    "resort": "Maldives Escape Resort",
+    "perPerson": "$3,200",
+    "image": "beach.jpg",
+    "description": "Relax in an overwater villa surrounded by crystal-clear waters."
+  },
+  {
+    "code": "MTEXP002",
+    "name": "Mountain Explorer",
+    "length": "5 Days",
+    "start": "2024-07-10",
+    "resort": "Alpine Lodge",
+    "perPerson": "$2,800",
+    "image": "mountains.jpg",
+    "description": "Adventure through snowy trails and charming mountain towns."
+  },
+  {
+    "code": "CITY003",
+    "name": "City Lights",
+    "length": "6 Days",
+    "start": "2024-08-20",
+    "resort": "Tokyo Grand Hotel",
+    "perPerson": "$2,500",
+    "image": "tokyo.jpg",
+    "description": "Experience the energy and culture of Japan’s capital city."
+  }
+]
