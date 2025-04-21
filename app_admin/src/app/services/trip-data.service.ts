@@ -1,38 +1,65 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Trip } from '../models/trip';
+import { User } from '../models/users';
+import { AuthResponse } from '../models/authresponse';
+import { BROWSER_STORAGE } from '../storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripDataService {
-  private baseUrl = 'http://localhost:3000/api/trips';
+  private apiBaseUrl = 'http://localhost:3000/api/';
+  private tripUrl = `${this.apiBaseUrl}trips`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(BROWSER_STORAGE) private storage: Storage
+  ) {}
 
-  // GET: all trips
+  // Get all trips
   getTrips(): Observable<Trip[]> {
-    return this.http.get<Trip[]>(this.baseUrl);
+    return this.http.get<Trip[]>(this.tripUrl);
   }
 
-  // POST: add a new trip
+  // Add a new trip
   addTrip(trip: Trip): Observable<Trip> {
-    return this.http.post<Trip>(this.baseUrl, trip);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.storage.getItem('travlr-token')}`
+    });
+    return this.http.post<Trip>(this.tripUrl, trip, { headers });
   }
 
-  // GET: get a single trip by code (FIXED to return a single Trip object)
+  // Get trip by code
   getTrip(tripCode: string): Observable<Trip> {
-    return this.http.get<Trip>(`${this.baseUrl}/${tripCode}`);
+    return this.http.get<Trip>(`${this.tripUrl}/${tripCode}`);
   }
 
-  // PUT: update a trip
+  // Update trip
   updateTrip(trip: Trip): Observable<Trip> {
-    return this.http.put<Trip>(`${this.baseUrl}/${trip.code}`, trip);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.storage.getItem('travlr-token')}`
+    });
+    return this.http.put<Trip>(`${this.tripUrl}/${trip.code}`, trip, { headers });
   }
 
-  // DELETE: delete a trip
-  deleteTrip(tripCode: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${tripCode}`);
+  // Auth functions
+  public login(user: User): Promise<AuthResponse | undefined> {
+    return this.makeAuthApiCall('login', user);
+  }
+
+  public register(user: User): Promise<AuthResponse | undefined> {
+    return this.makeAuthApiCall('register', user);
+  }
+
+  private makeAuthApiCall(urlPath: string, user: User): Promise<AuthResponse | undefined> {
+    const url = `${this.apiBaseUrl}${urlPath}`;
+    return this.http.post<AuthResponse>(url, user).toPromise().catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<undefined> {
+    console.error('API Error:', error);
+    return Promise.resolve(undefined);
   }
 }

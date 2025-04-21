@@ -1,0 +1,11 @@
+<div class="container" *ngIf="!isLoggedIn()">
+    <h2>Welcome to Travlr Getaways Admin</h2>
+    <p>Please log in to continue.</p>
+    <a class="btn btn-primary mt-3" routerLink="/login">Go to Login</a>
+  </div>
+  
+  <div class="container" *ngIf="isLoggedIn()">
+    <h2>You're logged in!</h2>
+    <p>Use the navigation to manage trips.</p>
+  </div>
+  

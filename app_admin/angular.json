@@ -50,6 +50,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/styles.css"
             ],
             "scripts": []
@@ -106,6 +107,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/styles.css"
             ],
             "scripts": []
